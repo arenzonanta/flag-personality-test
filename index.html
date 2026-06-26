@@ -352,7 +352,7 @@
             html += '<span class="step-text">'+(currentIdx+1)+'/30</span></div>';
             html += '<div class="question-box"><div class="question-text">'+q.q+'</div><div class="options">';
             for(var i=0; i<q.opts.length; i++) {
-                html += '<div class="option" data-s=\''+JSON.stringify(q.opts[i].s)+'\'><span class="option-num">'+Strin\g.fromCharCode(65+i)+'</span><span>'+q.opts[i].t+'</span></div>';
+                html += '<div class="option" data-s=\''+JSON.stringify(q.opts[i].s)+'\'><span class="option-num">'+String.fromCharCode(65+i)+'</span><span>'+q.opts[i].t+'</span></div>';
             }
             html += '</div></div></div>';
             quizArea.innerHTML = html;
