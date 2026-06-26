@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>🚩 The Ultimate Flag Test — What's Your True Color?</title>
+    <meta name="description" content="Take this 30-question personality test to discover your Red, Green, White, or Dark Flag combination. Detailed analysis for all flags included.">
+    <meta property="og:title" content="🚩 The Ultimate Flag Test">
+    <meta property="og:description" content="Discover your true personality flag.">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0510; font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            justify-content: flex-start; padding: 1rem;
+            background-image: radial-gradient(circle at 20% 30%, rgba(255,100,130,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(150,100,255,0.1) 0%, transparent 50%);
+            gap: 1.2rem;
+        }
+        .quiz-wrapper { width: 100%; max-width: 550px; position: relative; z-index: 1; }
+        .card {
+            background: rgba(20,15,35,0.85); border-radius: 2.5rem; padding: 2rem 1.5rem;
+            border: 1px solid rgba(255,200,220,0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            color: #f0e0f5; animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        h1 { font-size: 1.6rem; font-weight: 800; text-align: center; background: linear-gradient(135deg, #ffb0c0, #c9a0ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.3rem; }
+        .subtitle { text-align: center; font-size: 0.8rem; color: #b0a0c0; margin-bottom: 1.2rem; }
+        .progress-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+        .progress-bg { flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ff6080, #b070f0); border-radius: 10px; transition: width 0.3s ease; width: 0%; }
+        .step-text { font-weight: 700; font-size: 0.75rem; color: #ffd0e0; white-space: nowrap; }
+        .question-box { background: rgba(10,5,20,0.5); border-radius: 2rem; padding: 1.5rem 1.2rem; margin: 1rem 0; border: 1px solid rgba(255,200,220,0.2); }
+        .question-text { font-size: 1.1rem; font-weight: 700; color: #ffe8f0; text-align: center; margin-bottom: 1.5rem; line-height: 1.4; }
+        .options { display: flex; flex-direction: column; gap: 0.7rem; }
+        .option { background: rgba(30,20,40,0.6); border: 1.5px solid rgba(255,180,200,0.2); border-radius: 2.5rem; padding: 0.8rem 1.2rem; font-size: 0.85rem; font-weight: 500; color: #e0d0f0; display: flex; align-items: center; gap: 0.7rem; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: rgba(60,30,60,0.7); border-color: #ff90b0; transform: translateX(3px); }
+        .option-num { background: linear-gradient(135deg, #ffa0c0, #c090f0); color: #100510; font-weight: 800; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+        .loading-screen { text-align: center; padding: 2rem 1rem; }
+        .loading-spinner { width: 55px; height: 55px; border: 4px solid rgba(255,255,255,0.1); border-top-color: #c084fc; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1.5rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-steps { display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.85rem; color: #c0b0d0; }
+        .loading-step { opacity: 0; animation: fadeStep 0.6s forwards; }
+        .loading-step:nth-child(1) { animation-delay: 0.1s; } .loading-step:nth-child(2) { animation-delay: 0.7s; }
+        .loading-step:nth-child(3) { animation-delay: 1.3s; } .loading-step:nth-child(4) { animation-delay: 1.9s; }
+        .loading-step:nth-child(5) { animation-delay: 2.5s; }
+        @keyframes fadeStep { to { opacity: 1; } }
+        .result { text-align: center; }
+        .big-emoji { font-size: 4rem; margin-bottom: 0.3rem; animation: bounce 1s ease; }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .result-title { font-size: 1.7rem; font-weight: 800; margin: 0.2rem 0; }
+        .result-subtitle { font-size: 1rem; font-weight: 600; color: #d0c0e0; font-style: italic; margin-bottom: 0.5rem; }
+        .confidence-badge { display: inline-block; background: rgba(100,255,150,0.15); color: #80ffa0; padding: 0.2rem 0.8rem; border-radius: 15px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.8rem; }
+        .percent-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1rem 0; }
+        .percent-item { background: rgba(10,5,20,0.6); border-radius: 1.5rem; padding: 0.5rem 0.8rem; border: 1px solid rgba(255,255,255,0.15); min-width: 60px; }
+        .percent-num { font-size: 1.3rem; font-weight: 800; background: linear-gradient(to bottom, #ffe0f0, #c0b0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .analysis-section { text-align: left; margin: 1rem 0; }
+        .analysis-card { background: rgba(255,240,250,0.04); border-radius: 1rem; padding: 0.7rem 1rem; margin-bottom: 0.5rem; border-left: 4px solid; font-size: 0.78rem; line-height: 1.5; }
+        .analysis-card strong { font-size: 0.83rem; }
+        .btn { background: linear-gradient(135deg, #ffe0f0, #d0c0ff); border: none; padding: 0.8rem; border-radius: 3rem; font-weight: 700; font-size: 0.9rem; color: #100520; cursor: pointer; width: 100%; margin-top: 0.4rem; transition: 0.2s; }
+        .btn:hover { background: white; transform: scale(1.02); }
+        .btn-outline { background: rgba(255,255,255,0.08); color: #e0d0f0; border: 1px solid rgba(255,255,255,0.2); }
+        .share-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .share-btns .btn { flex: 1; min-width: 50px; font-size: 0.7rem; padding: 0.5rem; }
+        .ad-container { width: 100%; max-width: 550px; background: rgba(20,15,35,0.5); border-radius: 1.5rem; min-height: 90px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,200,220,0.1); position: relative; z-index: 1; overflow: hidden; }
+        .ad-label { position: absolute; top: 6px; left: 14px; font-size: 0.55rem; color: #5a4a6a; background: rgba(0,0,0,0.4); padding: 0.15rem 0.5rem; border-radius: 6px; z-index: 1; letter-spacing: 0.5px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-wrapper" id="quizArea"></div>
+    <div class="ad-container hidden" id="midAd"><span class="ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins></div>
+    <div class="ad-container hidden" id="bottomAd"><span class="ad-label">ADVERTISEMENT</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321" data-ad-format="auto"></ins></div>
+
+    <script>
+        try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+
+        var questions = [
+            { q: "Your partner gives you an expensive gift for no reason. First thought?", opts: [
+                { t: "They really love me — I should match this energy.", s: {r:2,g:1,w:1,d:0} },
+                { t: "There's probably an angle... but I'll accept it.", s: {r:1,g:0,w:0,d:3} },
+                { t: "So excited! Immediately post on my socials.", s: {r:2,g:0,w:1,d:1} },
+                { t: "I feel undeserving... they shouldn't have.", s: {r:0,g:0,w:4,d:0} }
+            ]},
+            { q: "You see your close friend liked your ex's post at 2 AM.", opts: [
+                { t: "Scroll past — probably mindless double-tap.", s: {r:0,g:3,w:1,d:0} },
+                { t: "Screenshot and send to another friend.", s: {r:1,g:0,w:0,d:3} },
+                { t: "Casually DM them: 'you good?'", s: {r:0,g:1,w:1,d:2} },
+                { t: "Go deep-stalk the ex's profile.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "After a heated argument, you realize they might have a point.", opts: [
+                { t: "Admit openly and apologize sincerely.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Acknowledge indirectly without saying sorry.", s: {r:1,g:1,w:0,d:2} },
+                { t: "Double down to save face.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Go quiet and avoid them for days.", s: {r:0,g:0,w:3,d:1} }
+            ]},
+            { q: "A toxic coworker suddenly becomes super friendly.", opts: [
+                { t: "Suspicious but stay polite with boundaries.", s: {r:0,g:2,w:1,d:1} },
+                { t: "Trust them — people genuinely change!", s: {r:0,g:1,w:4,d:0} },
+                { t: "Use this to get subtle payback.", s: {r:1,g:0,w:0,d:4} },
+                { t: "Bluntly confront: 'What do you want?'", s: {r:3,g:1,w:0,d:1} }
+            ]},
+            { q: "Your sibling 'forgets' to repay borrowed money again.", opts: [
+                { t: "Gently remind and offer budgeting help.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Let it go but silently resent them.", s: {r:0,g:0,w:2,d:2} },
+                { t: "Explode in front of the whole family.", s: {r:3,g:0,w:0,d:1} },
+                { t: "Start treating them coldly.", s: {r:1,g:0,w:1,d:3} }
+            ]},
+            { q: "Someone sends '?' every few minutes when you don't reply.", opts: [
+                { t: "Calmly say: 'I'll get back to you soon.'", s: {r:0,g:3,w:0,d:1} },
+                { t: "Leave them on read.", s: {r:1,g:0,w:0,d:3} },
+                { t: "Feel pressured and reply immediately.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Block them without explanation.", s: {r:2,g:0,w:1,d:1} }
+            ]},
+            { q: "Your best friend gets the promotion you wanted.", opts: [
+                { t: "Celebrate genuinely.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Congratulate but feel crushed inside.", s: {r:1,g:1,w:2,d:1} },
+                { t: "Distance myself — it hurts.", s: {r:1,g:0,w:3,d:0} },
+                { t: "Analyze their strategy for myself.", s: {r:0,g:0,w:0,d:4} }
+            ]},
+            { q: "A stranger is rude to you in public.", opts: [
+                { t: "Ignore — not worth my peace.", s: {r:0,g:3,w:1,d:0} },
+                { t: "Be rude back.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Feel shaken and replay it all day.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Death stare until they back off.", s: {r:2,g:0,w:0,d:2} }
+            ]},
+            { q: "Two close friends are fighting. Both vent to you.", opts: [
+                { t: "Listen neutrally without taking sides.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Try to mediate.", s: {r:0,g:3,w:0,d:1} },
+                { t: "Support whoever seems more right.", s: {r:1,g:0,w:0,d:2} },
+                { t: "Stay out of it completely.", s: {r:0,g:1,w:2,d:1} }
+            ]},
+            { q: "You find out a friend talked behind your back.", opts: [
+                { t: "Confront directly and seek clarity.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Act normal but never trust again.", s: {r:0,g:0,w:1,d:4} },
+                { t: "Cry privately but pretend it's fine.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Expose them publicly with receipts.", s: {r:3,g:0,w:0,d:2} }
+            ]},
+            { q: "Your partner hides a small debt. You discover it.", opts: [
+                { t: "Discuss calmly and make a plan together.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Feel betrayed — what else is hidden?", s: {r:2,g:0,w:0,d:2} },
+                { t: "Pretend you didn't see and observe.", s: {r:0,g:0,w:0,d:4} },
+                { t: "Pay it silently and never mention it.", s: {r:0,g:1,w:3,d:0} }
+            ]},
+            { q: "Someone interrupts you repeatedly in a group.", opts: [
+                { t: "Pause and say: 'Let me finish.'", s: {r:0,g:3,w:0,d:1} },
+                { t: "Raise my voice and talk over them.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Go completely silent.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Tell others later how rude they were.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "Your parent criticizes your choices in front of relatives.", opts: [
+                { t: "Stay calm and change the subject.", s: {r:0,g:3,w:1,d:0} },
+                { t: "Defend yourself aggressively.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Stay silent and feel humiliated.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Smile and plan a future confrontation.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "An old friend posts their 'perfect life' while you struggle.", opts: [
+                { t: "Feel happy for them.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Mute them so I don't see it.", s: {r:1,g:0,w:2,d:1} },
+                { t: "Compare every detail and feel miserable.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Look for flaws in their posts.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "You see someone drop their wallet and walk away.", opts: [
+                { t: "Run after them immediately.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Pick it up and try to contact them.", s: {r:0,g:3,w:0,d:1} },
+                { t: "Feel bad but keep walking.", s: {r:0,g:0,w:3,d:0} },
+                { t: "Check inside first, then decide.", s: {r:1,g:0,w:0,d:2} }
+            ]},
+            { q: "Your partner is suddenly jealous of your coworker.", opts: [
+                { t: "Reassure them gently and listen.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Get angry back — they don't trust me.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Agree to everything to end the argument.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Make them a little more jealous as a lesson.", s: {r:2,g:0,w:0,d:3} }
+            ]},
+            { q: "Someone mocks your appearance in front of others.", opts: [
+                { t: "Roast them back even funnier.", s: {r:2,g:0,w:0,d:2} },
+                { t: "Laugh it off and change the subject.", s: {r:0,g:2,w:2,d:0} },
+                { t: "Stay silent, then cry at home.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Stare and say: 'are you done?'", s: {r:1,g:3,w:0,d:1} }
+            ]},
+            { q: "Your bestie gets close to your biggest enemy.", opts: [
+                { t: "Ask your bestie nicely, no accusations.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Ultimatum: choose me or them!", s: {r:4,g:0,w:0,d:1} },
+                { t: "Passive-aggressive hints.", s: {r:2,g:0,w:0,d:2} },
+                { t: "Feel hurt but say nothing.", s: {r:0,g:0,w:4,d:0} }
+            ]},
+            { q: "Your relationship is getting boring.", opts: [
+                { t: "Serious talk to refresh things.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Secret excitement elsewhere.", s: {r:3,g:0,w:0,d:3} },
+                { t: "Endure it — all relationships fade.", s: {r:0,g:0,w:3,d:0} },
+                { t: "Tantrums for attention.", s: {r:2,g:0,w:2,d:1} }
+            ]},
+            { q: "A friend keeps borrowing money without repaying.", opts: [
+                { t: "Gentle reminder + help.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Silent, but annoyed.", s: {r:0,g:0,w:3,d:1} },
+                { t: "Throw shade publicly.", s: {r:3,g:0,w:0,d:2} },
+                { t: "Charity, but never again.", s: {r:1,g:2,w:2,d:0} }
+            ]},
+            { q: "Ex wants to meet to 'clear the air'.", opts: [
+                { t: "Politely decline.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Go secretly.", s: {r:2,g:0,w:1,d:3} },
+                { t: "Tell partner first.", s: {r:0,g:3,w:0,d:0} },
+                { t: "Go and flex how moved on you are.", s: {r:3,g:0,w:0,d:2} }
+            ]},
+            { q: "Group project: one member does nothing.", opts: [
+                { t: "Talk privately to understand.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Do it myself, resent them.", s: {r:0,g:0,w:3,d:1} },
+                { t: "Call them out publicly.", s: {r:3,g:0,w:0,d:1} },
+                { t: "Report anonymously.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "You realize you were wrong in an argument.", opts: [
+                { t: "Apologize sincerely.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Acknowledge without sorry.", s: {r:1,g:1,w:0,d:2} },
+                { t: "Double down to save face.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Avoid the person out of shame.", s: {r:0,g:0,w:3,d:1} }
+            ]},
+            { q: "Someone keeps calling you by the wrong name.", opts: [
+                { t: "Laugh it off — they're forgetful.", s: {r:0,g:1,w:3,d:0} },
+                { t: "Jokingly correct them.", s: {r:0,g:3,w:0,d:1} },
+                { t: "Call them the wrong name too.", s: {r:1,g:0,w:0,d:3} },
+                { t: "Make it awkward.", s: {r:4,g:0,w:0,d:0} }
+            ]},
+            { q: "Partner doesn't text back for hours.", opts: [
+                { t: "Assume they're busy.", s: {r:0,g:3,w:1,d:0} },
+                { t: "Send multiple follow-ups.", s: {r:2,g:0,w:1,d:1} },
+                { t: "Overthink everything.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Silent treatment later.", s: {r:2,g:0,w:0,d:2} }
+            ]},
+            { q: "Friend cancels last minute — third time.", opts: [
+                { t: "Reschedule, it's fine.", s: {r:0,g:2,w:2,d:0} },
+                { t: "Stop inviting them.", s: {r:1,g:0,w:0,d:3} },
+                { t: "Confront about flakiness.", s: {r:2,g:2,w:0,d:0} },
+                { t: "Hurt, pretend okay.", s: {r:0,g:0,w:4,d:0} }
+            ]},
+            { q: "Someone takes credit for your work.", opts: [
+                { t: "Address professionally with evidence.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Confront angrily.", s: {r:4,g:0,w:0,d:0} },
+                { t: "Let go, never forget.", s: {r:0,g:0,w:2,d:2} },
+                { t: "Sabotage quietly.", s: {r:1,g:0,w:0,d:4} }
+            ]},
+            { q: "Overhear someone saying negative things about you.", opts: [
+                { t: "Ignore — doesn't define me.", s: {r:0,g:3,w:1,d:0} },
+                { t: "Confront immediately.", s: {r:3,g:1,w:0,d:0} },
+                { t: "Internalize and feel terrible.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Store as future ammunition.", s: {r:1,g:0,w:0,d:3} }
+            ]},
+            { q: "Friend dating someone bad for them.", opts: [
+                { t: "Express concern gently, respect choice.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Tell them bluntly to break up.", s: {r:3,g:1,w:0,d:0} },
+                { t: "Watch silently from distance.", s: {r:0,g:0,w:2,d:2} },
+                { t: "Scheme to break them up.", s: {r:1,g:0,w:0,d:4} }
+            ]},
+            { q: "Friends don't seem to appreciate you.", opts: [
+                { t: "Communicate how I feel openly.", s: {r:0,g:4,w:0,d:0} },
+                { t: "Distance myself — see if they notice.", s: {r:1,g:0,w:1,d:2} },
+                { t: "Suffer in silence.", s: {r:0,g:0,w:4,d:0} },
+                { t: "Make them feel guilty subtly.", s: {r:1,g:0,w:0,d:3} }
+            ]}
+        ];
+
+        var combos = {
+            'green_green': { name:'The Sanctuary', emoji:'🟢', color:'#4ade80', desc:'Pure Green Flag. You are the safe space everyone needs.' },
+            'green_dark': { name:'The Silent Guardian', emoji:'🟢⚫', color:'#a0d2a0', desc:'Kind but always watching. You trust slowly but deeply.' },
+            'dark_green': { name:'The Silent Guardian', emoji:'🟢⚫', color:'#a0d2a0', desc:'Kind but always watching.' },
+            'red_green': { name:'The Passionate Protector', emoji:'🔴🟢', color:'#ff9966', desc:'Fierce love with a soft heart.' },
+            'green_red': { name:'The Passionate Protector', emoji:'🔴🟢', color:'#ff9966', desc:'Fierce love with a soft heart.' },
+            'red_dark': { name:'The Mastermind', emoji:'🔴⚫', color:'#cc6688', desc:'Calculated and intense. Nobody sees your next move.' },
+            'dark_red': { name:'The Mastermind', emoji:'🔴⚫', color:'#cc6688', desc:'Calculated and intense.' },
+            'white_green': { name:'The Gentle Soul', emoji:'⚪🟢', color:'#c0e0c0', desc:'Pure-hearted and kind, sometimes too much for your own good.' },
+            'green_white': { name:'The Gentle Soul', emoji:'⚪🟢', color:'#c0e0c0', desc:'Pure-hearted and kind.' },
+            'white_dark': { name:'The Quiet Observer', emoji:'⚪⚫', color:'#b0a0c0', desc:'You see everything, say little. Your silence is your power.' },
+            'dark_white': { name:'The Quiet Observer', emoji:'⚪⚫', color:'#b0a0c0', desc:'You see everything, say little.' },
+            'red_white': { name:'The Fragile Volcano', emoji:'🔴⚪', color:'#ff9999', desc:'Emotional rollercoaster — you feel everything intensely.' },
+            'white_red': { name:'The Fragile Volcano', emoji:'🔴⚪', color:'#ff9999', desc:'Emotional rollercoaster.' },
+            'dark_dark': { name:'The Shadow Architect', emoji:'⚫', color:'#9966cc', desc:'Master strategist. You operate on a different level.' },
+            'red_red': { name:'The Unfiltered Fire', emoji:'🔴', color:'#ff4d6d', desc:'No filter, no apologies. Your authenticity is both gift and curse.' },
+            'white_white': { name:'The Ghost', emoji:'⚪', color:'#e0e0e0', desc:'You blend in to survive. But who are you really?' }
+        };
+
+        var explanations = {
+            red: {
+                title: '🔴 RED FLAG',
+                color: '#ff4d6d',
+                low: 'Your Red Flag is low. You rarely explode and can control your emotions well. People see you as composed and level-headed.',
+                mid: 'Your Red Flag is moderate. You have an impulsive side that emerges when cornered or provoked. You\'re passionate but can sometimes overwhelm others.',
+                high: 'Your Red Flag is high! You\'re reactive and emotionally expressive. People may find you intense, but deep down you just want to be heard and understood.'
+            },
+            green: {
+                title: '🟢 GREEN FLAG',
+                color: '#4ade80',
+                low: 'Your Green Flag is low. You might need to work on communication and empathy. Opening up more could strengthen your relationships.',
+                mid: 'Your Green Flag is decent. You can be a good listener and show empathy, but there\'s still room to grow in expressing yourself healthily.',
+                high: 'Your Green Flag is high! You have strong emotional intelligence. People feel safe around you because you listen without judgment and communicate with kindness.'
+            },
+            white: {
+                title: '⚪ WHITE FLAG',
+                color: '#e2e8f0',
+                low: 'Your White Flag is low. You don\'t easily sacrifice yourself — and that\'s actually healthy! You know your worth and set boundaries.',
+                mid: 'Your White Flag is moderate. You sometimes concede too easily to keep the peace, but you still stand up for yourself when it really matters.',
+                high: 'Your White Flag is high. You often put yourself last to make others comfortable. Remember: your needs matter too. Learning to say no is a form of self-respect.'
+            },
+            dark: {
+                title: '⚫ DARK FLAG',
+                color: '#c084fc',
+                low: 'Your Dark Flag is low. You\'re open and straightforward — you don\'t play games or operate behind the scenes. People appreciate your honesty.',
+                mid: 'Your Dark Flag is moderate. You have a strategic side that emerges when needed. You\'re observant and sometimes keep your cards close to your chest.',
+                high: 'Your Dark Flag is high. You\'re highly observant and calculating. You see patterns others miss, but being more transparent could deepen your connections.'
+            }
+        };
+
+        var quizArea = document.getElementById('quizArea');
+        var midAd = document.getElementById('midAd');
+        var bottomAd = document.getElementById('bottomAd');
+        var currentIdx = 0;
+        var scores = { r:0, g:0, w:0, d:0 };
+
+        function showMidAd() {
+            if (midAd.classList.contains('hidden')) {
+                midAd.classList.remove('hidden');
+                try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            }
+        }
+
+        function showBottomAd() {
+            if (bottomAd.classList.contains('hidden')) {
+                bottomAd.classList.remove('hidden');
+                try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            }
+        }
+
+        function getExplanation(flag, pct) {
+            if (pct >= 35) return explanations[flag].high;
+            if (pct >= 18) return explanations[flag].mid;
+            return explanations[flag].low;
+        }
+
+        function renderQuestion() {
+            if (currentIdx >= questions.length) { showLoading(); return; }
+            if (currentIdx === 15) showMidAd();
+
+            var q = questions[currentIdx];
+            var progress = (currentIdx / questions.length) * 100;
+
+            var html = '<div class="card"><h1>🚩 THE ULTIMATE FLAG TEST</h1>';
+            html += '<div class="subtitle">✨ 30 unique questions ✨</div>';
+            html += '<div class="progress-row"><div class="progress-bg"><div class="progress-fill" style="width:'+progress+'%;"></div></div>';
+            html += '<span class="step-text">'+(currentIdx+1)+'/30</span></div>';
+            html += '<div class="question-box"><div class="question-text">'+q.q+'</div><div class="options">';
+            for(var i=0; i<q.opts.length; i++) {
+                html += '<div class="option" data-s=\''+JSON.stringify(q.opts[i].s)+'\'><span class="option-num">'+Strin\g.fromCharCode(65+i)+'</span><span>'+q.opts[i].t+'</span></div>';
+            }
+            html += '</div></div></div>';
+            quizArea.innerHTML = html;
+
+            var opts = document.querySelectorAll('.option');
+            for(var j=0; j<opts.length; j++) {
+                opts[j].addEventListener('click', function() {
+                    var s = JSON.parse(this.getAttribute('data-s'));
+                    scores.r += s.r; scores.g += s.g; scores.w += s.w; scores.d += s.d;
+                    currentIdx++;
+                    renderQuestion();
+                });
+            }
+        }
+
+        function showLoading() {
+            var html = '<div class="card loading-screen"><div class="loading-spinner"></div><div class="loading-steps">';
+            html += '<div class="loading-step">🔍 Analyzing your answers...</div>';
+            html += '<div class="loading-step">🧠 Detecting emotional patterns...</div>';
+            html += '<div class="loading-step">🕵️ Comparing personality traits...</div>';
+            html += '<div class="loading-step">🌪️ Finding hidden tendencies...</div>';
+            html += '<div class="loading-step">✅ Done. Your true colors revealed.</div></div></div>';
+            quizArea.innerHTML = html;
+            setTimeout(renderResult, 3200);
+        }
+
+        function renderResult() {
+            showBottomAd();
+            var sum = scores.r+scores.g+scores.w+scores.d || 1;
+            var p = { r:Math.round(scores.r/sum*100), g:Math.round(scores.g/sum*100), w:Math.round(scores.w/sum*100), d:Math.round(scores.d/sum*100) };
+            var sorted = [{k:'r',v:p.r},{k:'g',v:p.g},{k:'w',v:p.w},{k:'d',v:p.d}].sort(function(a,b){return b.v-a.v});
+            var primary = sorted[0].k, secondary = sorted[1].v>=20 ? sorted[1].k : primary;
+            var combo = combos[primary+'_'+secondary] || { name:'Complex Flag', emoji:'🏴', color:'#ccc', desc:'You defy simple categories.' };
+            var variance = Math.max(p.r,p.g,p.w,p.d) - Math.min(p.r,p.g,p.w,p.d);
+            var confidence = Math.min(98, Math.max(55, 100-variance));
+
+            var html = '<div class="card result">';
+            html += '<div class="big-emoji">'+combo.emoji+'</div>';
+            html += '<div class="result-title" style="color:'+combo.color+';">'+combo.name+'</div>';
+            html += '<div class="result-subtitle">'+combo.desc+'</div>';
+            html += '<div class="confidence-badge">Confidence: '+confidence+'%</div>';
+            html += '<div class="percent-grid">';
+            html += '<div class="percent-item"><span style="color:#ff8c94;">🔴 Red</span><br><span class="percent-num">'+p.r+'%</span></div>';
+            html += '<div class="percent-item"><span style="color:#7fbf7f;">🟢 Green</span><br><span class="percent-num">'+p.g+'%</span></div>';
+            html += '<div class="percent-item"><span style="color:#e0e0e0;">⚪ White</span><br><span class="percent-num">'+p.w+'%</span></div>';
+            html += '<div class="percent-item"><span style="color:#c792ea;">⚫ Dark</span><br><span class="percent-num">'+p.d+'%</span></div></div>';
+            html += '<div class="analysis-section"><h3 style="font-size:0.9rem;margin-bottom:0.5rem;">📋 Why you got each flag:</h3>';
+            
+            var flags = [{key:'red',pct:p.r},{key:'green',pct:p.g},{key:'white',pct:p.w},{key:'dark',pct:p.d}];
+            for(var i=0; i<flags.length; i++) {
+                var f = flags[i], exp = explanations[f.key], reason = getExplanation(f.key, f.pct);
+                html += '<div class="analysis-card" style="border-left-color:'+exp.color+';"><strong style="color:'+exp.color+';">'+exp.title+' — '+f.pct+'%</strong><p style="margin-top:0.2rem;">'+reason+'</p></div>';
+            }
+            html += '</div>';
+            html += '<button class="btn" id="retakeBtn">🔄 Retake Honestly</button>';
+            html += '<div class="share-btns"><button class="btn btn-outline" id="copyBtn">📋 Copy</button><button class="btn btn-outline" id="waBtn">📱 WA</button><button class="btn btn-outline" id="twBtn">🐦 Tweet</button></div></div>';
+            quizArea.innerHTML = html;
+
+            document.getElementById('retakeBtn').addEventListener('click', function() {
+                currentIdx=0; scores={r:0,g:0,w:0,d:0};
+                midAd.classList.add('hidden'); bottomAd.classList.add('hidden');
+                renderQuestion();
+            });
+
+            var shareText = '🚩 My Flag: '+combo.name+' | Red:'+p.r+'% Green:'+p.g+'% White:'+p.w+'% Dark:'+p.d+'% | Confidence:'+confidence+'% | Try: '+window.location.href;
+            document.getElementById('copyBtn').addEventListener('click', function(){ navigator.clipboard.writeText(shareText).then(function(){ alert('Copied!'); }); });
+            document.getElementById('waBtn').addEventListener('click', function(){ window.open('https://wa.me/?text='+encodeURIComponent(shareText)); });
+            document.getElementById('twBtn').addEventListener('click', function(){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)); });
+        }
+
+        renderQuestion();
+    </script>
+</body>
+</html>
